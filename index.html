@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Sekolah</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1>SMK Digital</h1>
+      <nav class="site-nav">
+        <button class="nav-button active" data-target="home">Beranda</button>
+        <button class="nav-button" data-target="about">Tentang</button>
+        <button class="nav-button" data-target="students">Siswa</button>
+        <button class="nav-button" data-target="teachers">Guru</button>
+        <button class="nav-button" data-target="contact">Kontak</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home" class="page-section active">
+      <h2>Selamat datang di SMK Digital</h2>
+      <p>Website sekolah ini dibuat untuk menampilkan informasi profil sekolah, daftar siswa, guru, dan kontak.</p>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Visi</h3>
+          <p>Mencetak generasi unggul yang siap bersaing di era digital.</p>
+        </article>
+        <article class="card">
+          <h3>Misi</h3>
+          <p>Menyelenggarakan pendidikan berkualitas dengan teknologi, kreativitas, dan karakter kuat.</p>
+        </article>
+        <article class="card">
+          <h3>Program</h3>
+          <p>Teknologi Informasi, Multimedia, Rekayasa Perangkat Lunak, dan Bisnis Digital.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="page-section">
+      <h2>Tentang Sekolah</h2>
+      <p>SMK Digital adalah sekolah menengah kejuruan yang mengedepankan praktik dan penguasaan teknologi.</p>
+      <ul class="info-list">
+        <li>Alamat: Jl. Pendidikan No. 10, Kota Contoh</li>
+        <li>Telp: (021) 123-4567</li>
+        <li>Email: info@smkdigital.sch.id</li>
+        <li>Akreditasi: A</li>
+      </ul>
+    </section>
+
+    <section id="students" class="page-section">
+      <div class="section-header">
+        <h2>Daftar Siswa</h2>
+        <p>Tambahkan siswa baru dengan formulir di bawah ini.</p>
+      </div>
+      <div class="form-card">
+        <form id="studentForm">
+          <div class="form-row">
+            <label for="studentName">Nama Siswa</label>
+            <input id="studentName" type="text" required placeholder="Masukkan nama siswa">
+          </div>
+          <div class="form-row">
+            <label for="studentClass">Kelas</label>
+            <input id="studentClass" type="text" required placeholder="Contoh: XII RPL 1">
+          </div>
+          <div class="form-row">
+            <label for="studentMajor">Jurusan</label>
+            <input id="studentMajor" type="text" required placeholder="Contoh: Rekayasa Perangkat Lunak">
+          </div>
+          <button type="submit" class="btn">Tambah Siswa</button>
+        </form>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th></tr>
+          </thead>
+          <tbody id="studentTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="teachers" class="page-section">
+      <h2>Daftar Guru</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th></tr>
+          </thead>
+          <tbody id="teacherTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="contact" class="page-section">
+      <h2>Kontak</h2>
+      <p>Hubungi kami untuk informasi pendaftaran dan kegiatan sekolah.</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Alamat</h3>
+          <p>Jl. Pendidikan No. 10, Kota Contoh</p>
+        </div>
+        <div class="contact-card">
+          <h3>Email</h3>
+          <p>info@smkdigital.sch.id</p>
+        </div>
+        <div class="contact-card">
+          <h3>Telepon</h3>
+          <p>(021) 123-4567</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 SMK Digital. Semua hak cipta dilindungi.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
