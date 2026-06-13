@@ -37,6 +37,10 @@ const monitorLastAction = document.getElementById('monitorLastAction');
 const monitorLogList = document.getElementById('monitorLogList');
 const monitorApplicants = document.getElementById('monitorApplicants');
 const monitorStudents = document.getElementById('monitorStudents');
+const monitorLogModal = document.getElementById('monitorLogModal');
+const monitorLogContent = document.getElementById('monitorLogContent');
+const monitorLogMeta = document.getElementById('monitorLogMeta');
+const monitorLogMessage = document.getElementById('monitorLogMessage');
 
 const studentForm = document.getElementById('studentForm');
 const teacherForm = document.getElementById('teacherForm');
@@ -147,10 +151,45 @@ function renderMonitoring() {
   const logs = loadLogs();
   monitorTotalLogs && (monitorTotalLogs.textContent = logs.length);
   monitorLastAction && (monitorLastAction.textContent = logs[0] ? new Date(logs[0].at).toLocaleString() : '-');
-  monitorLogList && (monitorLogList.innerHTML = logs.slice(0,50).map((l) => `<div style="padding:6px;border-bottom:1px solid #f1f1f1"><strong>${l.type}</strong> — ${l.message}<div style="font-size:12px;color:#666">${new Date(l.at).toLocaleString()}</div></div>`).join(''));
+  monitorLogList && (monitorLogList.innerHTML = logs.slice(0,50).map((l) => `<div style="padding:6px;border-bottom:1px solid #f1f1f1;display:flex;justify-content:space-between;align-items:center"><div><strong>${l.type}</strong> — ${l.message}<div style="font-size:12px;color:#666">${new Date(l.at).toLocaleString()}</div></div><div><button class="log-detail-btn" data-log-id="${l.id}">Detail</button></div></div>`).join(''));
   monitorApplicants && (monitorApplicants.textContent = loadApplicants().length);
   monitorStudents && (monitorStudents.textContent = loadStudents().length);
 }
+
+function showLogDetail(id) {
+  const logs = loadLogs();
+  const log = logs.find((l) => l.id === id);
+  if (!log) return;
+  monitorLogMeta && (monitorLogMeta.textContent = `${log.type} • ${new Date(log.at).toLocaleString()} • id:${log.id}`);
+  monitorLogMessage && (monitorLogMessage.textContent = log.message);
+  if (monitorLogModal) {
+    monitorLogModal.classList.add('open');
+    monitorLogModal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+function closeLogModal() {
+  if (monitorLogModal) {
+    monitorLogModal.classList.remove('open');
+    monitorLogModal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.log-detail-btn');
+  if (btn) {
+    showLogDetail(btn.dataset.logId);
+    return;
+  }
+  if (e.target.matches('.log-modal-close')) {
+    closeLogModal();
+    return;
+  }
+  if (e.target.id === 'monitorLogModal') {
+    closeLogModal();
+    return;
+  }
+});
 
 function setProfileForm() {
   const profile = loadProfile();

@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Sekolah</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+  /* Simple modal styles for log details */
+  .log-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.45); z-index: 9999; }
+  .log-modal.open { display: flex; }
+  .log-modal-card { width: 90%; max-width: 700px; background: #fff; border-radius: 8px; padding: 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  .log-modal-card h4 { margin: 0 0 8px 0; }
+  .log-modal-close { float: right; background: transparent; border: none; font-size: 18px; cursor: pointer; }
+  .log-meta { font-size: 13px; color: #666; margin-bottom: 8px; }
+  </style>
 </head>
 <body>
   <div class="app-shell">
@@ -370,6 +379,18 @@
             </table>
           </div>
         </section>
+
+        <!-- Log detail modal -->
+        <div id="monitorLogModal" class="log-modal" aria-hidden="true">
+          <div class="log-modal-card" role="dialog" aria-modal="true">
+            <button class="log-modal-close" title="Tutup">✕</button>
+            <div id="monitorLogContent">
+              <h4>Detail Log</h4>
+              <div class="log-meta" id="monitorLogMeta">-</div>
+              <div id="monitorLogMessage" style="white-space:pre-wrap">-</div>
+            </div>
+          </div>
+        </div>
 
         <section id="monitoring" class="page-section">
           <div class="page-title">
