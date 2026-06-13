@@ -3,222 +3,464 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Sekolah</title>
+  <title>Dashboard Sekolah</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1>SMK Digital</h1>
-      <nav class="site-nav">
-        <button class="nav-button active" data-target="home">Beranda</button>
-        <button class="nav-button" data-target="about">Tentang</button>
-        <button class="nav-button" data-target="news">Berita</button>
-        <button class="nav-button" data-target="students">Siswa</button>
-        <button class="nav-button" data-target="teachers">Guru</button>
-        <button class="nav-button" data-target="contact">Kontak</button>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section id="home" class="page-section active">
-      <div class="home-hero">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-logo">SD</div>
         <div>
-          <h2>Selamat datang di SMK Digital</h2>
-          <p class="lead">Website sekolah ini menampilkan profil, berita, data siswa/guru, agenda sekolah, dan fasilitas secara interaktif.</p>
-        </div>
-        <div class="badge-group">
-          <span class="badge">Akreditasi A</span>
-          <span class="badge">Program Digital</span>
-          <span class="badge">Layanan Mandiri</span>
+          <h1>SMK Digital</h1>
+          <p>Dashboard Sekolah</p>
         </div>
       </div>
-
-      <div class="card-grid">
-        <article class="card">
-          <h3>Visi</h3>
-          <p>Mencetak generasi unggul yang siap bersaing di era digital.</p>
-        </article>
-        <article class="card">
-          <h3>Misi</h3>
-          <p>Menyelenggarakan pendidikan berkualitas dengan teknologi, kreativitas, dan karakter kuat.</p>
-        </article>
-        <article class="card">
-          <h3>Program</h3>
-          <p>Rekayasa Perangkat Lunak, Teknik Komputer Jaringan, Multimedia, dan Bisnis Digital.</p>
-        </article>
+      <nav class="sidebar-nav">
+        <button class="nav-button active" data-target="dashboard">Dashboard</button>
+        <button class="nav-button" data-target="akademik">Akademik</button>
+        <button class="nav-button" data-target="penilaian">Penilaian</button>
+        <button class="nav-button" data-target="ppdb">PPDB</button>
+        <button class="nav-button" data-target="absensi">Absensi</button>
+        <button class="nav-button" data-target="laporan">Laporan</button>
+        <button class="nav-button" data-target="pengaturan">Pengaturan</button>
+      </nav>
+      <div class="sidebar-footer">
+        <span>Versi 1.0</span>
       </div>
+    </aside>
 
-      <div class="metrics-grid">
-        <article class="stat-card">
-          <span class="stat-number" id="studentCount">0</span>
-          <p>Siswa Terdaftar</p>
-        </article>
-        <article class="stat-card">
-          <span class="stat-number" id="teacherCount">0</span>
-          <p>Guru Aktif</p>
-        </article>
-        <article class="stat-card">
-          <span class="stat-number" id="announcementCount">0</span>
-          <p>Info Terbaru</p>
-        </article>
-      </div>
-
-      <div class="facility-grid">
-        <article class="card facility-card">
-          <h3>Laboratorium</h3>
-          <p>Laboratorium Komputer dengan perangkat modern dan koneksi internet.</p>
-        </article>
-        <article class="card facility-card">
-          <h3>Perpustakaan</h3>
-          <p>Ruang baca lengkap dengan koleksi buku pelajaran dan literatur teknologi.</p>
-        </article>
-        <article class="card facility-card">
-          <h3>Ruang Kegiatan</h3>
-          <p>Tempat untuk pelatihan, lomba, dan pengembangan soft-skill siswa.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="about" class="page-section">
-      <h2>Tentang Sekolah</h2>
-      <p>SMK Digital adalah sekolah menengah kejuruan yang mengedepankan praktik, inovasi, dan penguasaan teknologi.</p>
-      <div class="info-block">
-        <ul class="info-list">
-          <li>Alamat: Jl. Pendidikan No. 10, Kota Contoh</li>
-          <li>Telp: (021) 123-4567</li>
-          <li>Email: info@smkdigital.sch.id</li>
-          <li>Akreditasi: A</li>
-        </ul>
-        <div class="schedule-card">
-          <h3>Agenda Sekolah Mingguan</h3>
-          <table class="table-small">
-            <thead>
-              <tr><th>Hari</th><th>Kegiatan</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Senin</td><td>Upacara, Pelajaran RPL</td></tr>
-              <tr><td>Selasa</td><td>Workshop Multimedia</td></tr>
-              <tr><td>Rabu</td><td>Praktik TKJ dan Bimbingan Karir</td></tr>
-              <tr><td>Kamis</td><td>Ujian Kompetensi & Diskusi Proyek</td></tr>
-              <tr><td>Jumat</td><td>Pelajaran Agama dan Kegiatan Ekstrakurikuler</td></tr>
-            </tbody>
-          </table>
+    <div class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Sistem Informasi Sekolah</p>
+          <h2>Selamat datang, Admin</h2>
         </div>
-      </div>
-    </section>
+        <button id="backupTopButton" class="secondary-btn">Backup Data</button>
+      </header>
 
-    <section id="news" class="page-section">
-      <div class="section-header">
-        <h2>Pengumuman & Berita</h2>
-        <p>Informasi terbaru tentang kegiatan, pendaftaran, dan acara sekolah.</p>
-      </div>
-      <div class="form-card">
-        <form id="announcementForm">
-          <div class="form-row">
-            <label for="announcementTitle">Judul Pengumuman</label>
-            <input id="announcementTitle" type="text" required placeholder="Masukkan judul pengumuman">
+      <main class="main-content container">
+        <section id="dashboard" class="page-section active">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Dashboard</p>
+              <h2>Ringkasan Sekolah</h2>
+            </div>
+            <p>Overview modul akademik, penilaian, PPDB, absensi, dan laporan.</p>
           </div>
-          <div class="form-row">
-            <label for="announcementBody">Isi Pengumuman</label>
-            <textarea id="announcementBody" rows="4" required placeholder="Tulis pengumuman..."></textarea>
-          </div>
-          <button type="submit" class="btn">Tambah Pengumuman</button>
-        </form>
-      </div>
-      <div class="list-wrap">
-        <ul id="announcementList" class="announcement-list"></ul>
-      </div>
-    </section>
 
-    <section id="students" class="page-section">
-      <div class="section-header">
-        <h2>Daftar Siswa</h2>
-        <p>Kelola data siswa dengan formulir dan cari data dengan cepat.</p>
-      </div>
-      <div class="form-card">
-        <div class="form-row">
-          <label for="studentSearch">Cari Siswa</label>
-          <input id="studentSearch" type="search" placeholder="Cari nama, kelas, atau jurusan">
-        </div>
-        <form id="studentForm">
-          <div class="form-row">
-            <label for="studentName">Nama Siswa</label>
-            <input id="studentName" type="text" required placeholder="Masukkan nama siswa">
+          <div class="metrics-grid">
+            <article class="stat-card">
+              <span class="stat-number" id="studentCount">0</span>
+              <p>Siswa Terdaftar</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="teacherCount">0</span>
+              <p>Guru Aktif</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="classCount">0</span>
+              <p>Data Kelas</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="subjectCount">0</span>
+              <p>Mata Pelajaran</p>
+            </article>
           </div>
-          <div class="form-row">
-            <label for="studentClass">Kelas</label>
-            <input id="studentClass" type="text" required placeholder="Contoh: XII RPL 1">
-          </div>
-          <div class="form-row">
-            <label for="studentMajor">Jurusan</label>
-            <input id="studentMajor" type="text" required placeholder="Contoh: Rekayasa Perangkat Lunak">
-          </div>
-          <button type="submit" class="btn">Tambah Siswa</button>
-        </form>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th><th>Aksi</th></tr>
-          </thead>
-          <tbody id="studentTableBody"></tbody>
-        </table>
-      </div>
-    </section>
 
-    <section id="teachers" class="page-section">
-      <div class="section-header">
-        <h2>Daftar Guru</h2>
-        <p>Tambahkan guru baru dan lihat mata pelajaran yang diajarkan.</p>
-      </div>
-      <div class="form-card form-split">
-        <form id="teacherForm">
-          <div class="form-row">
-            <label for="teacherName">Nama Guru</label>
-            <input id="teacherName" type="text" required placeholder="Masukkan nama guru">
+          <div class="metric-panel-grid">
+            <article class="panel-card">
+              <h3>PPDB Saat Ini</h3>
+              <p class="large-number" id="applicantCount">0</p>
+            </article>
+            <article class="panel-card">
+              <h3>Ranking Siswa</h3>
+              <p class="large-number" id="rankingCount">0</p>
+            </article>
+            <article class="panel-card">
+              <h3>Rekap Absensi</h3>
+              <p class="large-number" id="attendanceCount">0</p>
+            </article>
           </div>
-          <div class="form-row">
-            <label for="teacherSubject">Mata Pelajaran</label>
-            <input id="teacherSubject" type="text" required placeholder="Contoh: Matematika">
+
+          <div class="dashboard-grid">
+            <article class="card">
+              <h3>Profil Sekolah</h3>
+              <p>SMK Digital menyiapkan siswa dengan keterampilan teknis dan karakter digital.</p>
+            </article>
+            <article class="card">
+              <h3>Fitur Utama</h3>
+              <ul class="feature-list">
+                <li>Akademik, Nilai, PPDB</li>
+                <li>Absensi dan Ranking</li>
+                <li>Laporan & Backup</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Support</h3>
+              <p>Hubungi admin sekolah untuk konfigurasi lebih lanjut.</p>
+            </article>
           </div>
-          <button type="submit" class="btn">Tambah Guru</button>
-        </form>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Aksi</th></tr>
-          </thead>
-          <tbody id="teacherTableBody"></tbody>
-        </table>
-      </div>
-    </section>
+        </section>
 
-    <section id="contact" class="page-section">
-      <h2>Kontak</h2>
-      <p>Hubungi kami untuk informasi pendaftaran dan kegiatan sekolah.</p>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h3>Alamat</h3>
-          <p>Jl. Pendidikan No. 10, Kota Contoh</p>
-        </div>
-        <div class="contact-card">
-          <h3>Email</h3>
-          <p>info@smkdigital.sch.id</p>
-        </div>
-        <div class="contact-card">
-          <h3>Telepon</h3>
-          <p>(021) 123-4567</p>
-        </div>
-      </div>
-    </section>
-  </main>
+        <section id="akademik" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Akademik</p>
+              <h2>Data Akademik</h2>
+            </div>
+            <p>Kelola siswa, guru, kelas, dan mata pelajaran di satu tempat.</p>
+          </div>
 
-  <footer class="site-footer">
-    <p>© 2026 SMK Digital. Semua hak cipta dilindungi.</p>
-  </footer>
+          <div class="form-grid">
+            <div class="form-card">
+              <h3>Data Siswa</h3>
+              <form id="studentForm">
+                <div class="form-row">
+                  <label for="studentName">Nama Siswa</label>
+                  <input id="studentName" type="text" required placeholder="Masukkan nama siswa">
+                </div>
+                <div class="form-row">
+                  <label for="studentClass">Kelas</label>
+                  <input id="studentClass" type="text" required placeholder="Contoh: X RPL 1">
+                </div>
+                <div class="form-row">
+                  <label for="studentMajor">Jurusan</label>
+                  <input id="studentMajor" type="text" required placeholder="Contoh: Rekayasa Perangkat Lunak">
+                </div>
+                <button type="submit" class="btn">Tambah Siswa</button>
+              </form>
+            </div>
+
+            <div class="form-card">
+              <h3>Data Guru</h3>
+              <form id="teacherForm">
+                <div class="form-row">
+                  <label for="teacherName">Nama Guru</label>
+                  <input id="teacherName" type="text" required placeholder="Masukkan nama guru">
+                </div>
+                <div class="form-row">
+                  <label for="teacherSubject">Mata Pelajaran</label>
+                  <input id="teacherSubject" type="text" required placeholder="Contoh: Matematika">
+                </div>
+                <button type="submit" class="btn">Tambah Guru</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Siswa</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Guru</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="teacherTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-card">
+              <h3>Data Kelas</h3>
+              <form id="classForm">
+                <div class="form-row">
+                  <label for="className">Nama Kelas</label>
+                  <input id="className" type="text" required placeholder="Contoh: XI TKJ 2">
+                </div>
+                <button type="submit" class="btn">Tambah Kelas</button>
+              </form>
+            </div>
+
+            <div class="form-card">
+              <h3>Mata Pelajaran</h3>
+              <form id="subjectForm">
+                <div class="form-row">
+                  <label for="subjectName">Nama Mata Pelajaran</label>
+                  <input id="subjectName" type="text" required placeholder="Contoh: Bahasa Inggris">
+                </div>
+                <button type="submit" class="btn">Tambah Mapel</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Kelas</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Kelas</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="classTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Mata Pelajaran</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Mata Pelajaran</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="subjectTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="penilaian" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Penilaian</p>
+              <h2>Input dan Data Nilai</h2>
+            </div>
+            <p>Kelola nilai siswa dan tampilkan ranking secara otomatis.</p>
+          </div>
+
+          <div class="form-card">
+            <h3>Input Nilai</h3>
+            <form id="scoreForm">
+              <div class="form-row">
+                <label for="scoreStudent">Siswa</label>
+                <select id="scoreStudent" required></select>
+              </div>
+              <div class="form-row">
+                <label for="scoreSubject">Mata Pelajaran</label>
+                <select id="scoreSubject" required></select>
+              </div>
+              <div class="form-row">
+                <label for="scoreValue">Nilai</label>
+                <input id="scoreValue" type="number" required min="0" max="100" placeholder="0 - 100">
+              </div>
+              <button type="submit" class="btn">Simpan Nilai</button>
+            </form>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Data Nilai</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Siswa</th><th>Mapel</th><th>Nilai</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="scoreTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Ranking</h3>
+            <table>
+              <thead>
+                <tr><th>Ranking</th><th>Siswa</th><th>Rata-rata</th><th>Total Nilai</th></tr>
+              </thead>
+              <tbody id="rankingTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="ppdb" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">PPDB</p>
+              <h2>Proses Pendaftaran</h2>
+            </div>
+            <p>Catat pendaftar, verifikasi status, dan kelola seleksi.</p>
+          </div>
+
+          <div class="form-card">
+            <h3>Pendaftaran</h3>
+            <form id="applicantForm">
+              <div class="form-row">
+                <label for="applicantName">Nama</label>
+                <input id="applicantName" type="text" required placeholder="Nama pendaftar">
+              </div>
+              <div class="form-row">
+                <label for="applicantEmail">Email</label>
+                <input id="applicantEmail" type="email" required placeholder="Email pendaftar">
+              </div>
+              <div class="form-row">
+                <label for="applicantPhone">Telepon</label>
+                <input id="applicantPhone" type="tel" required placeholder="Telepon pendaftar">
+              </div>
+              <button type="submit" class="btn">Simpan Pendaftar</button>
+            </form>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="stat-card">
+              <span class="stat-number" id="applicantPending">0</span>
+              <p>Menunggu</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="applicantAccepted">0</span>
+              <p>Diterima</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="applicantRejected">0</span>
+              <p>Ditolak</p>
+            </article>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Data Pendaftar</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Status</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="applicantTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="absensi" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Absensi</p>
+              <h2>Input dan Rekap</h2>
+            </div>
+            <p>Catat kehadiran siswa dan pantau rekapnya setiap hari.</p>
+          </div>
+
+          <div class="form-card">
+            <h3>Input Absensi</h3>
+            <form id="attendanceForm">
+              <div class="form-row">
+                <label for="attendanceDate">Tanggal</label>
+                <input id="attendanceDate" type="date" required>
+              </div>
+              <div class="form-row">
+                <label for="attendanceStudent">Siswa</label>
+                <select id="attendanceStudent" required></select>
+              </div>
+              <div class="form-row">
+                <label for="attendanceStatus">Status</label>
+                <select id="attendanceStatus" required>
+                  <option value="Hadir">Hadir</option>
+                  <option value="Tidak Hadir">Tidak Hadir</option>
+                  <option value="Izin">Izin</option>
+                  <option value="Sakit">Sakit</option>
+                </select>
+              </div>
+              <button type="submit" class="btn">Simpan Absensi</button>
+            </form>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">Rekap Absensi</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Nama</th><th>Hadir</th><th>Tidak Hadir</th><th>Izin</th><th>Sakit</th><th>Total</th></tr>
+              </thead>
+              <tbody id="attendanceSummaryBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="laporan" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Laporan</p>
+              <h2>Ringkasan dan Ekspor</h2>
+            </div>
+            <p>Tampilkan laporan siswa, nilai, PPDB, dan absensi secara singkat.</p>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="card">
+              <h3>Laporan Siswa</h3>
+              <p>Jumlah siswa aktif dan distribusi kelas.</p>
+            </article>
+            <article class="card">
+              <h3>Laporan Nilai</h3>
+              <p>Gabungkan data nilai, ranking, dan rata-rata akademik.</p>
+            </article>
+            <article class="card">
+              <h3>Laporan PPDB</h3>
+              <p>Ringkasan status pendaftar dan proses seleksi.</p>
+            </article>
+            <article class="card">
+              <h3>Laporan Absensi</h3>
+              <p>Rekap kehadiran siswa untuk evaluasi kehadiran.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="pengaturan" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Pengaturan</p>
+              <h2>Profil, User, dan Backup</h2>
+            </div>
+            <p>Atur profil sekolah, user aplikasi, dan cadangkan data secara cepat.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-card">
+              <h3>Profil Sekolah</h3>
+              <form id="profileForm">
+                <div class="form-row">
+                  <label for="schoolName">Nama Sekolah</label>
+                  <input id="schoolName" type="text" required>
+                </div>
+                <div class="form-row">
+                  <label for="schoolAddress">Alamat</label>
+                  <input id="schoolAddress" type="text" required>
+                </div>
+                <div class="form-row">
+                  <label for="schoolEmail">Email</label>
+                  <input id="schoolEmail" type="email" required>
+                </div>
+                <div class="form-row">
+                  <label for="schoolPhone">Telepon</label>
+                  <input id="schoolPhone" type="text" required>
+                </div>
+                <button type="submit" class="btn">Simpan Profil</button>
+              </form>
+            </div>
+
+            <div class="form-card">
+              <h3>User Management</h3>
+              <form id="userForm">
+                <div class="form-row">
+                  <label for="userName">Username</label>
+                  <input id="userName" type="text" required placeholder="Contoh: admin">
+                </div>
+                <div class="form-row">
+                  <label for="userRole">Role</label>
+                  <select id="userRole" required>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Operator">Operator</option>
+                    <option value="Guru">Guru</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn">Tambah User</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <h3 class="section-heading">User Aplikasi</h3>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Username</th><th>Role</th><th>Aksi</th></tr>
+              </thead>
+              <tbody id="userTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="form-card">
+            <h3>Backup Database</h3>
+            <p>Ekspor semua data aplikasi dalam format JSON untuk cadangan.</p>
+            <button id="backupButton" class="btn">Unduh Backup</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 </body>

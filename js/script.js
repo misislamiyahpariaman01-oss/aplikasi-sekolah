@@ -2,71 +2,136 @@ const sections = document.querySelectorAll('.page-section');
 const navButtons = document.querySelectorAll('.nav-button');
 const studentTableBody = document.getElementById('studentTableBody');
 const teacherTableBody = document.getElementById('teacherTableBody');
-const announcementList = document.getElementById('announcementList');
-const studentForm = document.getElementById('studentForm');
-const teacherForm = document.getElementById('teacherForm');
-const announcementForm = document.getElementById('announcementForm');
+const classTableBody = document.getElementById('classTableBody');
+const subjectTableBody = document.getElementById('subjectTableBody');
+const scoreTableBody = document.getElementById('scoreTableBody');
+const rankingTableBody = document.getElementById('rankingTableBody');
+const applicantTableBody = document.getElementById('applicantTableBody');
+const attendanceSummaryBody = document.getElementById('attendanceSummaryBody');
+const userTableBody = document.getElementById('userTableBody');
+const scoreStudent = document.getElementById('scoreStudent');
+const scoreSubject = document.getElementById('scoreSubject');
+const attendanceStudent = document.getElementById('attendanceStudent');
+const attendanceDate = document.getElementById('attendanceDate');
+const backupButton = document.getElementById('backupButton');
+const backupTopButton = document.getElementById('backupTopButton');
+const schoolName = document.getElementById('schoolName');
+const schoolAddress = document.getElementById('schoolAddress');
+const schoolEmail = document.getElementById('schoolEmail');
+const schoolPhone = document.getElementById('schoolPhone');
+const userName = document.getElementById('userName');
+const userRole = document.getElementById('userRole');
 const studentSearch = document.getElementById('studentSearch');
-const studentName = document.getElementById('studentName');
-const studentClass = document.getElementById('studentClass');
-const studentMajor = document.getElementById('studentMajor');
-const teacherName = document.getElementById('teacherName');
-const teacherSubject = document.getElementById('teacherSubject');
-const announcementTitle = document.getElementById('announcementTitle');
-const announcementBody = document.getElementById('announcementBody');
 const studentCount = document.getElementById('studentCount');
 const teacherCount = document.getElementById('teacherCount');
-const announcementCount = document.getElementById('announcementCount');
+const classCount = document.getElementById('classCount');
+const subjectCount = document.getElementById('subjectCount');
+const applicantCount = document.getElementById('applicantCount');
+const rankingCount = document.getElementById('rankingCount');
+const attendanceCount = document.getElementById('attendanceCount');
+const applicantPending = document.getElementById('applicantPending');
+const applicantAccepted = document.getElementById('applicantAccepted');
+const applicantRejected = document.getElementById('applicantRejected');
+
+const studentForm = document.getElementById('studentForm');
+const teacherForm = document.getElementById('teacherForm');
+const classForm = document.getElementById('classForm');
+const subjectForm = document.getElementById('subjectForm');
+const scoreForm = document.getElementById('scoreForm');
+const applicantForm = document.getElementById('applicantForm');
+const attendanceForm = document.getElementById('attendanceForm');
+const profileForm = document.getElementById('profileForm');
+const userForm = document.getElementById('userForm');
 
 const defaultStudents = [
-  { name: 'Siti Aisyah', class: 'X RPL 1', major: 'Rekayasa Perangkat Lunak' },
-  { name: 'Ahmad Budi', class: 'XI TKJ 2', major: 'Teknik Komputer Jaringan' },
-  { name: 'Lina Permata', class: 'XII Multimedia', major: 'Multimedia' },
+  { id: 'student-1', name: 'Siti Aisyah', class: 'X RPL 1', major: 'Rekayasa Perangkat Lunak' },
+  { id: 'student-2', name: 'Ahmad Budi', class: 'XI TKJ 2', major: 'Teknik Komputer Jaringan' },
+  { id: 'student-3', name: 'Lina Permata', class: 'XII Multimedia', major: 'Multimedia' },
 ];
 
 const defaultTeachers = [
-  { name: 'Ibu Anisa', subject: 'Matematika' },
-  { name: 'Bapak Dedi', subject: 'Bahasa Indonesia' },
-  { name: 'Ibu Rina', subject: 'Teknologi Informasi' },
-  { name: 'Bapak Joko', subject: 'Multimedia' },
+  { id: 'teacher-1', name: 'Ibu Anisa', subject: 'Matematika' },
+  { id: 'teacher-2', name: 'Bapak Dedi', subject: 'Bahasa Indonesia' },
+  { id: 'teacher-3', name: 'Ibu Rina', subject: 'Teknologi Informasi' },
+  { id: 'teacher-4', name: 'Bapak Joko', subject: 'Multimedia' },
 ];
 
-const defaultAnnouncements = [
-  { title: 'Pendaftaran Baru Dibuka', body: 'Penerimaan peserta didik baru dibuka untuk semua program keahlian.' },
-  { title: 'Lomba Kreativitas Digital', body: 'Ajak siswa mengikuti lomba desain grafis dan video animasi sekolah.', },
+const defaultClasses = [
+  { id: 'class-1', name: 'X RPL 1' },
+  { id: 'class-2', name: 'XI TKJ 2' },
+  { id: 'class-3', name: 'XII Multimedia' },
 ];
+
+const defaultSubjects = [
+  { id: 'subject-1', name: 'Matematika' },
+  { id: 'subject-2', name: 'Bahasa Indonesia' },
+  { id: 'subject-3', name: 'Teknologi Informasi' },
+];
+
+const defaultScores = [
+  { id: 'score-1', studentId: 'student-1', subjectId: 'subject-1', value: 88 },
+  { id: 'score-2', studentId: 'student-2', subjectId: 'subject-2', value: 92 },
+];
+
+const defaultApplicants = [
+  { id: 'applicant-1', name: 'Rina Marlina', email: 'rina@example.com', phone: '081234567890', status: 'Menunggu' },
+  { id: 'applicant-2', name: 'Budi Santoso', email: 'budi@example.com', phone: '082345678901', status: 'Diterima' },
+];
+
+const defaultAttendance = [
+  { id: 'attendance-1', studentId: 'student-1', date: '2026-06-10', status: 'Hadir' },
+  { id: 'attendance-2', studentId: 'student-2', date: '2026-06-10', status: 'Izin' },
+];
+
+const defaultUsers = [
+  { id: 'user-1', username: 'admin', role: 'Administrator' },
+];
+
+const defaultProfile = {
+  name: 'SMK Digital',
+  address: 'Jl. Pendidikan No. 10, Kota Contoh',
+  email: 'info@smkdigital.sch.id',
+  phone: '(021) 123-4567',
+};
+
+function createId(prefix) {
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+}
 
 function loadData(key, fallback) {
   const stored = localStorage.getItem(key);
   return stored ? JSON.parse(stored) : fallback;
 }
 
-function saveData(key, items) {
-  localStorage.setItem(key, JSON.stringify(items));
+function saveData(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
-function loadStudents() {
-  return loadData('schoolStudents', defaultStudents);
-}
+function loadStudents() { return loadData('schoolStudents', defaultStudents); }
+function saveStudents(students) { saveData('schoolStudents', students); }
+function loadTeachers() { return loadData('schoolTeachers', defaultTeachers); }
+function saveTeachers(teachers) { saveData('schoolTeachers', teachers); }
+function loadClasses() { return loadData('schoolClasses', defaultClasses); }
+function saveClasses(classes) { saveData('schoolClasses', classes); }
+function loadSubjects() { return loadData('schoolSubjects', defaultSubjects); }
+function saveSubjects(subjects) { saveData('schoolSubjects', subjects); }
+function loadScores() { return loadData('schoolScores', defaultScores); }
+function saveScores(scores) { saveData('schoolScores', scores); }
+function loadApplicants() { return loadData('schoolApplicants', defaultApplicants); }
+function saveApplicants(applicants) { saveData('schoolApplicants', applicants); }
+function loadAttendance() { return loadData('schoolAttendance', defaultAttendance); }
+function saveAttendance(attendance) { saveData('schoolAttendance', attendance); }
+function loadUsers() { return loadData('schoolUsers', defaultUsers); }
+function saveUsers(users) { saveData('schoolUsers', users); }
+function loadProfile() { return loadData('schoolProfile', defaultProfile); }
+function saveProfile(profile) { saveData('schoolProfile', profile); }
 
-function saveStudents(students) {
-  saveData('schoolStudents', students);
-}
-
-function loadTeachers() {
-  return loadData('schoolTeachers', defaultTeachers);
-}
-
-function saveTeachers(teachers) {
-  saveData('schoolTeachers', teachers);
-}
-
-function loadAnnouncements() {
-  return loadData('schoolAnnouncements', defaultAnnouncements);
-}
-
-function saveAnnouncements(announcements) {
-  saveData('schoolAnnouncements', announcements);
+function setProfileForm() {
+  const profile = loadProfile();
+  schoolName.value = profile.name;
+  schoolAddress.value = profile.address;
+  schoolEmail.value = profile.email;
+  schoolPhone.value = profile.phone;
 }
 
 function getFilteredStudents() {
@@ -84,9 +149,9 @@ function renderStudents() {
   const students = getFilteredStudents();
   studentTableBody.innerHTML = '';
 
-  if (students.length === 0) {
+  if (!students.length) {
     const row = document.createElement('tr');
-    row.innerHTML = '<td colspan="5">Tidak ada siswa yang cocok.</td>';
+    row.innerHTML = '<td colspan="5">Belum ada siswa.</td>';
     studentTableBody.appendChild(row);
     return;
   }
@@ -98,7 +163,7 @@ function renderStudents() {
       <td>${student.name}</td>
       <td>${student.class}</td>
       <td>${student.major}</td>
-      <td><button class="remove-btn" data-type="student" data-index="${index}">Hapus</button></td>
+      <td><button class="remove-btn" data-action="delete" data-type="student" data-id="${student.id}">Hapus</button></td>
     `;
     studentTableBody.appendChild(row);
   });
@@ -108,9 +173,9 @@ function renderTeachers() {
   const teachers = loadTeachers();
   teacherTableBody.innerHTML = '';
 
-  if (teachers.length === 0) {
+  if (!teachers.length) {
     const row = document.createElement('tr');
-    row.innerHTML = '<td colspan="4">Belum ada data guru.</td>';
+    row.innerHTML = '<td colspan="4">Belum ada guru.</td>';
     teacherTableBody.appendChild(row);
     return;
   }
@@ -121,80 +186,329 @@ function renderTeachers() {
       <td>${index + 1}</td>
       <td>${teacher.name}</td>
       <td>${teacher.subject}</td>
-      <td><button class="remove-btn" data-type="teacher" data-index="${index}">Hapus</button></td>
+      <td><button class="remove-btn" data-action="delete" data-type="teacher" data-id="${teacher.id}">Hapus</button></td>
     `;
     teacherTableBody.appendChild(row);
   });
 }
 
-function renderAnnouncements() {
-  const announcements = loadAnnouncements();
-  announcementList.innerHTML = '';
+function renderClasses() {
+  const classes = loadClasses();
+  classTableBody.innerHTML = '';
 
-  if (announcements.length === 0) {
-    announcementList.innerHTML = '<li class="announcement-item">Belum ada pengumuman.</li>';
+  if (!classes.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="3">Belum ada kelas.</td>';
+    classTableBody.appendChild(row);
     return;
   }
 
-  announcements.forEach((announcement, index) => {
-    const item = document.createElement('li');
-    item.className = 'announcement-item';
-    item.innerHTML = `
-      <h4>${announcement.title}</h4>
-      <p>${announcement.body}</p>
-      <div class="action-row">
-        <button class="remove-btn" data-type="announcement" data-index="${index}">Hapus</button>
-      </div>
+  classes.forEach((item, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${item.name}</td>
+      <td><button class="remove-btn" data-action="delete" data-type="class" data-id="${item.id}">Hapus</button></td>
     `;
-    announcementList.appendChild(item);
+    classTableBody.appendChild(row);
   });
 }
 
-function renderStats() {
-  studentCount.textContent = loadStudents().length;
-  teacherCount.textContent = loadTeachers().length;
-  announcementCount.textContent = loadAnnouncements().length;
+function renderSubjects() {
+  const subjects = loadSubjects();
+  subjectTableBody.innerHTML = '';
+
+  if (!subjects.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="3">Belum ada mata pelajaran.</td>';
+    subjectTableBody.appendChild(row);
+    return;
+  }
+
+  subjects.forEach((item, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${item.name}</td>
+      <td><button class="remove-btn" data-action="delete" data-type="subject" data-id="${item.id}">Hapus</button></td>
+    `;
+    subjectTableBody.appendChild(row);
+  });
+}
+
+function renderScoreOptions() {
+  const students = loadStudents();
+  const subjects = loadSubjects();
+  scoreStudent.innerHTML = '<option value="">Pilih siswa</option>' + students.map((student) => `<option value="${student.id}">${student.name}</option>`).join('');
+  scoreSubject.innerHTML = '<option value="">Pilih mata pelajaran</option>' + subjects.map((subject) => `<option value="${subject.id}">${subject.name}</option>`).join('');
+  attendanceStudent.innerHTML = '<option value="">Pilih siswa</option>' + students.map((student) => `<option value="${student.id}">${student.name}</option>`).join('');
+}
+
+function renderScores() {
+  const scores = loadScores();
+  const students = loadStudents();
+  const subjects = loadSubjects();
+  scoreTableBody.innerHTML = '';
+
+  if (!scores.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="5">Belum ada data nilai.</td>';
+    scoreTableBody.appendChild(row);
+    return;
+  }
+
+  scores.forEach((score, index) => {
+    const student = students.find((item) => item.id === score.studentId) || { name: 'Unknown' };
+    const subject = subjects.find((item) => item.id === score.subjectId) || { name: 'Unknown' };
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${student.name}</td>
+      <td>${subject.name}</td>
+      <td>${score.value}</td>
+      <td><button class="remove-btn" data-action="delete" data-type="score" data-id="${score.id}">Hapus</button></td>
+    `;
+    scoreTableBody.appendChild(row);
+  });
+}
+
+function renderRanking() {
+  const scores = loadScores();
+  const students = loadStudents();
+  const grouped = {};
+
+  scores.forEach((score) => {
+    if (!grouped[score.studentId]) {
+      grouped[score.studentId] = { total: 0, count: 0 };
+    }
+    grouped[score.studentId].total += score.value;
+    grouped[score.studentId].count += 1;
+  });
+
+  const ranking = Object.entries(grouped)
+    .map(([studentId, meta]) => {
+      const student = students.find((item) => item.id === studentId) || { name: 'Unknown' };
+      return {
+        studentId,
+        name: student.name,
+        average: meta.total / meta.count,
+        count: meta.count,
+      };
+    })
+    .sort((a, b) => b.average - a.average);
+
+  rankingTableBody.innerHTML = '';
+
+  if (!ranking.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="4">Belum ada ranking nilai.</td>';
+    rankingTableBody.appendChild(row);
+    return;
+  }
+
+  ranking.forEach((item, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${item.name}</td>
+      <td>${item.average.toFixed(2)}</td>
+      <td>${item.count}</td>
+    `;
+    rankingTableBody.appendChild(row);
+  });
+}
+
+function renderApplicants() {
+  const applicants = loadApplicants();
+  applicantTableBody.innerHTML = '';
+
+  if (!applicants.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="6">Belum ada pendaftar.</td>';
+    applicantTableBody.appendChild(row);
+    return;
+  }
+
+  applicants.forEach((applicant, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${applicant.name}</td>
+      <td>${applicant.email}</td>
+      <td>${applicant.phone}</td>
+      <td>${applicant.status}</td>
+      <td>
+        ${applicant.status === 'Menunggu' ? `<button class="action-btn" data-action="accept" data-id="${applicant.id}">Terima</button><button class="action-btn" data-action="reject" data-id="${applicant.id}">Tolak</button>` : ''}
+        <button class="remove-btn" data-action="delete" data-type="applicant" data-id="${applicant.id}">Hapus</button>
+      </td>
+    `;
+    applicantTableBody.appendChild(row);
+  });
+}
+
+function renderAttendanceSummary() {
+  const attendance = loadAttendance();
+  const students = loadStudents();
+  const summary = {};
+
+  attendance.forEach((record) => {
+    if (!summary[record.studentId]) {
+      summary[record.studentId] = { Hadir: 0, 'Tidak Hadir': 0, Izin: 0, Sakit: 0 };
+    }
+    summary[record.studentId][record.status] += 1;
+  });
+
+  attendanceSummaryBody.innerHTML = '';
+
+  students.forEach((student, index) => {
+    const counts = summary[student.id] || { Hadir: 0, 'Tidak Hadir': 0, Izin: 0, Sakit: 0 };
+    const total = counts.Hadir + counts['Tidak Hadir'] + counts.Izin + counts.Sakit;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${student.name}</td>
+      <td>${counts.Hadir}</td>
+      <td>${counts['Tidak Hadir']}</td>
+      <td>${counts.Izin}</td>
+      <td>${counts.Sakit}</td>
+      <td>${total}</td>
+    `;
+    attendanceSummaryBody.appendChild(row);
+  });
+}
+
+function renderUsers() {
+  const users = loadUsers();
+  userTableBody.innerHTML = '';
+
+  if (!users.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="4">Belum ada user.</td>';
+    userTableBody.appendChild(row);
+    return;
+  }
+
+  users.forEach((user, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${user.username}</td>
+      <td>${user.role}</td>
+      <td><button class="remove-btn" data-action="delete" data-type="user" data-id="${user.id}">Hapus</button></td>
+    `;
+    userTableBody.appendChild(row);
+  });
+}
+
+function updateSectionStats() {
+  const students = loadStudents().length;
+  const teachers = loadTeachers().length;
+  const classes = loadClasses().length;
+  const subjects = loadSubjects().length;
+  const applicants = loadApplicants();
+  const attendance = loadAttendance();
+
+  studentCount.textContent = students;
+  teacherCount.textContent = teachers;
+  classCount.textContent = classes;
+  subjectCount.textContent = subjects;
+  applicantCount.textContent = applicants.length;
+  rankingCount.textContent = loadScores().length ? Object.keys(loadScores().reduce((acc, score) => {
+    acc[score.studentId] = true;
+    return acc;
+  }, {})).length : 0;
+  attendanceCount.textContent = attendance.length;
+
+  applicantPending.textContent = applicants.filter((applicant) => applicant.status === 'Menunggu').length;
+  applicantAccepted.textContent = applicants.filter((applicant) => applicant.status === 'Diterima').length;
+  applicantRejected.textContent = applicants.filter((applicant) => applicant.status === 'Ditolak').length;
 }
 
 function switchSection(targetId) {
-  sections.forEach((section) => {
-    section.classList.toggle('active', section.id === targetId);
-  });
-  navButtons.forEach((button) => {
-    button.classList.toggle('active', button.dataset.target === targetId);
-  });
+  sections.forEach((section) => section.classList.toggle('active', section.id === targetId));
+  navButtons.forEach((button) => button.classList.toggle('active', button.dataset.target === targetId));
 }
 
-function handleRemove(event) {
-  const button = event.target.closest('.remove-btn');
+function handleAction(event) {
+  const button = event.target.closest('[data-action]');
   if (!button) return;
 
+  const action = button.dataset.action;
   const type = button.dataset.type;
-  const index = Number(button.dataset.index);
+  const id = button.dataset.id;
 
-  if (type === 'student') {
-    const students = loadStudents();
-    students.splice(index, 1);
-    saveStudents(students);
-    renderStudents();
-    renderStats();
+  if (action === 'delete' && type && id) {
+    if (type === 'student') {
+      const students = loadStudents().filter((item) => item.id !== id);
+      saveStudents(students);
+      renderStudents();
+      renderScoreOptions();
+    }
+    if (type === 'teacher') {
+      saveTeachers(loadTeachers().filter((item) => item.id !== id));
+      renderTeachers();
+    }
+    if (type === 'class') {
+      saveClasses(loadClasses().filter((item) => item.id !== id));
+      renderClasses();
+    }
+    if (type === 'subject') {
+      saveSubjects(loadSubjects().filter((item) => item.id !== id));
+      renderSubjects();
+      renderScoreOptions();
+    }
+    if (type === 'score') {
+      saveScores(loadScores().filter((item) => item.id !== id));
+      renderScores();
+      renderRanking();
+    }
+    if (type === 'applicant') {
+      saveApplicants(loadApplicants().filter((item) => item.id !== id));
+      renderApplicants();
+      updateSectionStats();
+    }
+    if (type === 'user') {
+      saveUsers(loadUsers().filter((item) => item.id !== id));
+      renderUsers();
+    }
   }
 
-  if (type === 'teacher') {
-    const teachers = loadTeachers();
-    teachers.splice(index, 1);
-    saveTeachers(teachers);
-    renderTeachers();
-    renderStats();
+  if ((action === 'accept' || action === 'reject') && id) {
+    const applicants = loadApplicants().map((applicant) => {
+      if (applicant.id === id) {
+        return { ...applicant, status: action === 'accept' ? 'Diterima' : 'Ditolak' };
+      }
+      return applicant;
+    });
+    saveApplicants(applicants);
+    renderApplicants();
+    updateSectionStats();
   }
+}
 
-  if (type === 'announcement') {
-    const announcements = loadAnnouncements();
-    announcements.splice(index, 1);
-    saveAnnouncements(announcements);
-    renderAnnouncements();
-    renderStats();
-  }
+function downloadBackup() {
+  const backup = {
+    students: loadStudents(),
+    teachers: loadTeachers(),
+    classes: loadClasses(),
+    subjects: loadSubjects(),
+    scores: loadScores(),
+    applicants: loadApplicants(),
+    attendance: loadAttendance(),
+    users: loadUsers(),
+    profile: loadProfile(),
+    generatedAt: new Date().toISOString(),
+  };
+
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'school-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 navButtons.forEach((button) => {
@@ -205,50 +519,144 @@ studentForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const students = loadStudents();
   students.push({
-    name: studentName.value.trim(),
-    class: studentClass.value.trim(),
-    major: studentMajor.value.trim(),
+    id: createId('student'),
+    name: document.getElementById('studentName').value.trim(),
+    class: document.getElementById('studentClass').value.trim(),
+    major: document.getElementById('studentMajor').value.trim(),
   });
   saveStudents(students);
   renderStudents();
-  renderStats();
+  renderScoreOptions();
+  updateSectionStats();
   studentForm.reset();
-  studentName.focus();
 });
 
 teacherForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const teachers = loadTeachers();
   teachers.push({
-    name: teacherName.value.trim(),
-    subject: teacherSubject.value.trim(),
+    id: createId('teacher'),
+    name: document.getElementById('teacherName').value.trim(),
+    subject: document.getElementById('teacherSubject').value.trim(),
   });
   saveTeachers(teachers);
   renderTeachers();
-  renderStats();
+  updateSectionStats();
   teacherForm.reset();
-  teacherName.focus();
 });
 
-announcementForm.addEventListener('submit', (event) => {
+classForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  const announcements = loadAnnouncements();
-  announcements.unshift({
-    title: announcementTitle.value.trim(),
-    body: announcementBody.value.trim(),
-  });
-  saveAnnouncements(announcements);
-  renderAnnouncements();
-  renderStats();
-  announcementForm.reset();
-  announcementTitle.focus();
+  const classes = loadClasses();
+  classes.push({ id: createId('class'), name: document.getElementById('className').value.trim() });
+  saveClasses(classes);
+  renderClasses();
+  updateSectionStats();
+  classForm.reset();
 });
 
-studentSearch.addEventListener('input', () => renderStudents());
+subjectForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const subjects = loadSubjects();
+  subjects.push({ id: createId('subject'), name: document.getElementById('subjectName').value.trim() });
+  saveSubjects(subjects);
+  renderSubjects();
+  renderScoreOptions();
+  updateSectionStats();
+  subjectForm.reset();
+});
 
-document.addEventListener('click', handleRemove);
+scoreForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const scores = loadScores();
+  scores.push({
+    id: createId('score'),
+    studentId: scoreStudent.value,
+    subjectId: scoreSubject.value,
+    value: Number(document.getElementById('scoreValue').value),
+  });
+  saveScores(scores);
+  renderScores();
+  renderRanking();
+  updateSectionStats();
+  scoreForm.reset();
+});
 
-renderStudents();
-renderTeachers();
-renderAnnouncements();
-renderStats();
+applicantForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const applicants = loadApplicants();
+  applicants.push({
+    id: createId('applicant'),
+    name: document.getElementById('applicantName').value.trim(),
+    email: document.getElementById('applicantEmail').value.trim(),
+    phone: document.getElementById('applicantPhone').value.trim(),
+    status: 'Menunggu',
+  });
+  saveApplicants(applicants);
+  renderApplicants();
+  updateSectionStats();
+  applicantForm.reset();
+});
+
+attendanceForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const attendance = loadAttendance();
+  attendance.push({
+    id: createId('attendance'),
+    studentId: attendanceStudent.value,
+    date: attendanceDate.value,
+    status: document.getElementById('attendanceStatus').value,
+  });
+  saveAttendance(attendance);
+  renderAttendanceSummary();
+  updateSectionStats();
+  attendanceForm.reset();
+});
+
+profileForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  saveProfile({
+    name: schoolName.value.trim(),
+    address: schoolAddress.value.trim(),
+    email: schoolEmail.value.trim(),
+    phone: schoolPhone.value.trim(),
+  });
+  alert('Profil sekolah berhasil disimpan.');
+});
+
+userForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const users = loadUsers();
+  users.push({
+    id: createId('user'),
+    username: userName.value.trim(),
+    role: userRole.value,
+  });
+  saveUsers(users);
+  renderUsers();
+  userForm.reset();
+});
+
+studentSearch?.addEventListener('input', () => renderStudents());
+backupButton?.addEventListener('click', downloadBackup);
+backupTopButton?.addEventListener('click', downloadBackup);
+
+document.addEventListener('click', handleAction);
+
+function initialize() {
+  renderStudents();
+  renderTeachers();
+  renderClasses();
+  renderSubjects();
+  renderScoreOptions();
+  renderScores();
+  renderRanking();
+  renderApplicants();
+  renderAttendanceSummary();
+  renderUsers();
+  setProfileForm();
+  updateSectionStats();
+  attendanceDate.value = new Date().toISOString().slice(0, 10);
+}
+
+initialize();
