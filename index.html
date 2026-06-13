@@ -501,23 +501,60 @@
             <p>Tampilkan laporan siswa, nilai, PPDB, dan absensi secara singkat.</p>
           </div>
 
-          <div class="dashboard-grid">
-            <article class="card">
-              <h3>Laporan Siswa</h3>
-              <p>Jumlah siswa aktif dan distribusi kelas.</p>
-            </article>
-            <article class="card">
-              <h3>Laporan Nilai</h3>
-              <p>Gabungkan data nilai, ranking, dan rata-rata akademik.</p>
-            </article>
-            <article class="card">
-              <h3>Laporan PPDB</h3>
-              <p>Ringkasan status pendaftar dan proses seleksi.</p>
-            </article>
-            <article class="card">
-              <h3>Laporan Absensi</h3>
-              <p>Rekap kehadiran siswa untuk evaluasi kehadiran.</p>
-            </article>
+          <!-- Laporan Siswa -->
+          <div class="table-wrap">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 class="section-heading">Laporan Siswa</h3>
+              <button id="exportStudentReportBtn" class="secondary-btn">Export CSV</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Program Studi</th></tr>
+              </thead>
+              <tbody id="studentReportBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Laporan Nilai -->
+          <div class="table-wrap">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 class="section-heading">Laporan Nilai</h3>
+              <button id="exportScoreReportBtn" class="secondary-btn">Export CSV</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Siswa</th><th>Mata Pelajaran</th><th>Nilai</th></tr>
+              </thead>
+              <tbody id="scoreReportBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Laporan PPDB -->
+          <div class="table-wrap">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 class="section-heading">Laporan PPDB</h3>
+              <button id="exportPPDBReportBtn" class="secondary-btn">Export CSV</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Nama</th><th>Email</th><th>NISN</th><th>Status</th></tr>
+              </thead>
+              <tbody id="ppdbReportBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Laporan Absensi -->
+          <div class="table-wrap">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 class="section-heading">Laporan Absensi</h3>
+              <button id="exportAttendanceReportBtn" class="secondary-btn">Export CSV</button>
+            </div>
+            <table>
+              <thead>
+                <tr><th>No</th><th>Siswa</th><th>Tanggal</th><th>Status</th></tr>
+              </thead>
+              <tbody id="attendanceReportBody"></tbody>
+            </table>
           </div>
         </section>
 

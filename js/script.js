@@ -561,6 +561,138 @@ function renderUsers() {
   });
 }
 
+function renderStudentReport() {
+  const students = loadStudents();
+  const reportBody = document.getElementById('studentReportBody');
+  reportBody.innerHTML = '';
+
+  if (!students.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="4">Belum ada siswa.</td>';
+    reportBody.appendChild(row);
+    return;
+  }
+
+  students.forEach((student, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${student.name}</td>
+      <td>${student.class}</td>
+      <td>${student.major}</td>
+    `;
+    reportBody.appendChild(row);
+  });
+}
+
+function renderScoreReport() {
+  const scores = loadScores();
+  const students = loadStudents();
+  const subjects = loadSubjects();
+  const reportBody = document.getElementById('scoreReportBody');
+  reportBody.innerHTML = '';
+
+  if (!scores.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="4">Belum ada nilai.</td>';
+    reportBody.appendChild(row);
+    return;
+  }
+
+  scores.forEach((score, index) => {
+    const student = students.find(s => s.id === score.studentId);
+    const subject = subjects.find(s => s.id === score.subjectId);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${student ? student.name : '-'}</td>
+      <td>${subject ? subject.name : '-'}</td>
+      <td>${score.value}</td>
+    `;
+    reportBody.appendChild(row);
+  });
+}
+
+function renderPPDBReport() {
+  const applicants = loadApplicants();
+  const reportBody = document.getElementById('ppdbReportBody');
+  reportBody.innerHTML = '';
+
+  if (!applicants.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="5">Belum ada pendaftar.</td>';
+    reportBody.appendChild(row);
+    return;
+  }
+
+  applicants.forEach((applicant, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${applicant.name}</td>
+      <td>${applicant.email}</td>
+      <td>${applicant.nisn || '-'}</td>
+      <td><span style="padding: 4px 8px; border-radius: 4px; background: ${
+        applicant.status === 'Diterima' ? '#10b981' : 
+        applicant.status === 'Ditolak' ? '#ef4444' : '#f59e0b'
+      }; color: white; font-size: 12px;">${applicant.status}</span></td>
+    `;
+    reportBody.appendChild(row);
+  });
+}
+
+function renderAttendanceReport() {
+  const attendance = loadAttendance();
+  const students = loadStudents();
+  const reportBody = document.getElementById('attendanceReportBody');
+  reportBody.innerHTML = '';
+
+  if (!attendance.length) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td colspan="4">Belum ada absensi.</td>';
+    reportBody.appendChild(row);
+    return;
+  }
+
+  attendance.forEach((record, index) => {
+    const student = students.find(s => s.id === record.studentId);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${student ? student.name : '-'}</td>
+      <td>${record.date}</td>
+      <td><span style="padding: 4px 8px; border-radius: 4px; background: ${
+        record.status === 'Hadir' ? '#10b981' : 
+        record.status === 'Sakit' ? '#3b82f6' : '#f59e0b'
+      }; color: white; font-size: 12px;">${record.status}</span></td>
+    `;
+    reportBody.appendChild(row);
+  });
+}
+
+function exportToCSV(data, filename) {
+  if (!data.length) {
+    alert('Tidak ada data untuk diekspor');
+    return;
+  }
+
+  const headers = Object.keys(data[0]);
+  const csv = [
+    headers.join(','),
+    ...data.map(row => headers.map(header => JSON.stringify(row[header] || '')).join(','))
+  ].join('\n');
+
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${filename}-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  logAction('system', `Export laporan: ${filename}`);
+}
+
 function updateSectionStats() {
   const students = loadStudents().length;
   const teachers = loadTeachers().length;
@@ -828,6 +960,30 @@ studentSearch?.addEventListener('input', () => renderStudents());
 backupButton?.addEventListener('click', downloadBackup);
 backupTopButton?.addEventListener('click', downloadBackup);
 
+// Event listener untuk laporan export
+document.getElementById('exportStudentReportBtn')?.addEventListener('click', () => {
+  exportToCSV(loadStudents(), 'laporan-siswa');
+});
+document.getElementById('exportScoreReportBtn')?.addEventListener('click', () => {
+  const scores = loadScores().map(s => ({
+    siswa: loadStudents().find(st => st.id === s.studentId)?.name || '-',
+    mataPelajaran: loadSubjects().find(sb => sb.id === s.subjectId)?.name || '-',
+    nilai: s.value
+  }));
+  exportToCSV(scores, 'laporan-nilai');
+});
+document.getElementById('exportPPDBReportBtn')?.addEventListener('click', () => {
+  exportToCSV(loadApplicants(), 'laporan-ppdb');
+});
+document.getElementById('exportAttendanceReportBtn')?.addEventListener('click', () => {
+  const attendance = loadAttendance().map(a => ({
+    siswa: loadStudents().find(s => s.id === a.studentId)?.name || '-',
+    tanggal: a.date,
+    status: a.status
+  }));
+  exportToCSV(attendance, 'laporan-absensi');
+});
+
 document.addEventListener('click', handleAction);
 
 function initialize() {
@@ -841,6 +997,10 @@ function initialize() {
   renderApplicants();
   renderAttendanceSummary();
   renderUsers();
+  renderStudentReport();
+  renderScoreReport();
+  renderPPDBReport();
+  renderAttendanceReport();
   setProfileForm();
   updateSectionStats();
   renderMonitoringFiltered();
