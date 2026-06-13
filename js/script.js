@@ -41,6 +41,11 @@ const monitorLogModal = document.getElementById('monitorLogModal');
 const monitorLogContent = document.getElementById('monitorLogContent');
 const monitorLogMeta = document.getElementById('monitorLogMeta');
 const monitorLogMessage = document.getElementById('monitorLogMessage');
+const monitorFilterType = document.getElementById('monitorFilterType');
+const monitorSearchText = document.getElementById('monitorSearchText');
+const monitorDownloadAllBtn = document.getElementById('monitorDownloadAllBtn');
+const monitorCopyBtn = document.getElementById('monitorCopyBtn');
+const monitorDownloadSingleBtn = document.getElementById('monitorDownloadSingleBtn');
 
 const studentForm = document.getElementById('studentForm');
 const teacherForm = document.getElementById('teacherForm');
@@ -144,28 +149,7 @@ function logAction(type, message) {
   logs.unshift(entry);
   if (logs.length > 200) logs.pop();
   saveLogs(logs);
-  try { renderMonitoring(); } catch (e) { /* ignore if render not ready */ }
-}
-
-function renderMonitoring() {
-  const logs = loadLogs();
-  monitorTotalLogs && (monitorTotalLogs.textContent = logs.length);
-  monitorLastAction && (monitorLastAction.textContent = logs[0] ? new Date(logs[0].at).toLocaleString() : '-');
-  monitorLogList && (monitorLogList.innerHTML = logs.slice(0,50).map((l) => `<div style="padding:6px;border-bottom:1px solid #f1f1f1;display:flex;justify-content:space-between;align-items:center"><div><strong>${l.type}</strong> — ${l.message}<div style="font-size:12px;color:#666">${new Date(l.at).toLocaleString()}</div></div><div><button class="log-detail-btn" data-log-id="${l.id}">Detail</button></div></div>`).join(''));
-  monitorApplicants && (monitorApplicants.textContent = loadApplicants().length);
-  monitorStudents && (monitorStudents.textContent = loadStudents().length);
-}
-
-function showLogDetail(id) {
-  const logs = loadLogs();
-  const log = logs.find((l) => l.id === id);
-  if (!log) return;
-  monitorLogMeta && (monitorLogMeta.textContent = `${log.type} • ${new Date(log.at).toLocaleString()} • id:${log.id}`);
-  monitorLogMessage && (monitorLogMessage.textContent = log.message);
-  if (monitorLogModal) {
-    monitorLogModal.classList.add('open');
-    monitorLogModal.setAttribute('aria-hidden', 'false');
-  }
+  try { renderMonitoringFiltered(); } catch (e) { /* ignore if render not ready */ }
 }
 
 function closeLogModal() {
@@ -175,10 +159,100 @@ function closeLogModal() {
   }
 }
 
+let currentLogId = null;
+
+function getFilteredLogs() {
+  const logs = loadLogs();
+  const typeFilter = monitorFilterType?.value || '';
+  const searchFilter = monitorSearchText?.value.trim().toLowerCase() || '';
+  
+  return logs.filter((log) => {
+    const typeMatch = !typeFilter || log.type === typeFilter;
+    const searchMatch = !searchFilter || log.message.toLowerCase().includes(searchFilter);
+    return typeMatch && searchMatch;
+  });
+}
+
+function renderMonitoringFiltered() {
+  const allLogs = loadLogs();
+  const logs = getFilteredLogs();
+  
+  monitorTotalLogs && (monitorTotalLogs.textContent = allLogs.length);
+  monitorLastAction && (monitorLastAction.textContent = allLogs[0] ? new Date(allLogs[0].at).toLocaleString() : '-');
+  
+  monitorLogList && (monitorLogList.innerHTML = logs.slice(0, 100).map((l) => `
+    <div style="padding:6px;border-bottom:1px solid #f1f1f1;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <strong>${l.type}</strong> — ${l.message}
+        <div style="font-size:12px;color:#666">${new Date(l.at).toLocaleString()}</div>
+      </div>
+      <div><button class="log-detail-btn" data-log-id="${l.id}">Detail</button></div>
+    </div>
+  `).join(''));
+  
+  monitorApplicants && (monitorApplicants.textContent = loadApplicants().length);
+  monitorStudents && (monitorStudents.textContent = loadStudents().length);
+}
+
+function downloadAllLogs() {
+  const logs = getFilteredLogs();
+  const data = { logs, generatedAt: new Date().toISOString(), count: logs.length };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'logs-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  logAction('system', 'Download logs dijalankan');
+}
+
+function downloadSingleLog() {
+  if (!currentLogId) return;
+  const logs = loadLogs();
+  const log = logs.find((l) => l.id === currentLogId);
+  if (!log) return;
+  
+  const data = { log, generatedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'log-' + log.id + '.json';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  alert('Log berhasil diunduh');
+}
+
+function copyLogMessage() {
+  const msg = monitorLogMessage?.textContent;
+  if (!msg || msg === '-') return;
+  
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('Pesan berhasil disalin ke clipboard');
+  }).catch(() => {
+    alert('Gagal menyalin pesan');
+  });
+}
+
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.log-detail-btn');
   if (btn) {
-    showLogDetail(btn.dataset.logId);
+    const logId = btn.dataset.logId;
+    currentLogId = logId;
+    const logs = loadLogs();
+    const log = logs.find((l) => l.id === logId);
+    if (!log) return;
+    monitorLogMeta && (monitorLogMeta.textContent = `${log.type} • ${new Date(log.at).toLocaleString()} • id:${log.id}`);
+    monitorLogMessage && (monitorLogMessage.textContent = log.message);
+    if (monitorLogModal) {
+      monitorLogModal.classList.add('open');
+      monitorLogModal.setAttribute('aria-hidden', 'false');
+    }
     return;
   }
   if (e.target.matches('.log-modal-close')) {
@@ -189,7 +263,22 @@ document.addEventListener('click', (e) => {
     closeLogModal();
     return;
   }
+  if (e.target.id === 'monitorDownloadAllBtn') {
+    downloadAllLogs();
+    return;
+  }
+  if (e.target.id === 'monitorCopyBtn') {
+    copyLogMessage();
+    return;
+  }
+  if (e.target.id === 'monitorDownloadSingleBtn') {
+    downloadSingleLog();
+    return;
+  }
 });
+
+monitorFilterType?.addEventListener('change', renderMonitoringFiltered);
+monitorSearchText?.addEventListener('input', renderMonitoringFiltered);
 
 function setProfileForm() {
   const profile = loadProfile();
@@ -754,7 +843,7 @@ function initialize() {
   renderUsers();
   setProfileForm();
   updateSectionStats();
-  renderMonitoring();
+  renderMonitoringFiltered();
   attendanceDate.value = new Date().toISOString().slice(0, 10);
 }
 

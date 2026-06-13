@@ -387,7 +387,11 @@
             <div id="monitorLogContent">
               <h4>Detail Log</h4>
               <div class="log-meta" id="monitorLogMeta">-</div>
-              <div id="monitorLogMessage" style="white-space:pre-wrap">-</div>
+              <div id="monitorLogMessage" style="white-space:pre-wrap;margin-bottom:12px">-</div>
+              <div style="display:flex;gap:8px">
+                <button id="monitorCopyBtn" class="btn" style="padding:6px 12px;flex:1">Salin Pesan</button>
+                <button id="monitorDownloadSingleBtn" class="btn" style="padding:6px 12px;flex:1">Download Log Ini</button>
+              </div>
             </div>
           </div>
         </div>
@@ -422,6 +426,24 @@
 
           <div class="form-card">
             <h3>Activity Log Terbaru</h3>
+            <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+              <select id="monitorFilterType" style="padding:6px;border:1px solid #ccc;border-radius:4px">
+                <option value="">Semua Tipe</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="class">Class</option>
+                <option value="subject">Subject</option>
+                <option value="score">Score</option>
+                <option value="applicant">Applicant</option>
+                <option value="attendance">Attendance</option>
+                <option value="user">User</option>
+                <option value="profile">Profile</option>
+                <option value="delete">Delete</option>
+                <option value="system">System</option>
+              </select>
+              <input id="monitorSearchText" type="text" placeholder="Cari pesan..." style="padding:6px;border:1px solid #ccc;border-radius:4px;flex:1;min-width:150px">
+              <button id="monitorDownloadAllBtn" class="btn" style="padding:6px 12px">Download Logs</button>
+            </div>
             <div class="log-list" id="monitorLogList" style="max-height:300px;overflow:auto;padding:8px;background:#fff;border-radius:6px;border:1px solid #eee"></div>
           </div>
         </section>
