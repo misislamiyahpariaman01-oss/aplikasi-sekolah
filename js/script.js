@@ -324,7 +324,7 @@ function renderApplicants() {
 
   if (!applicants.length) {
     const row = document.createElement('tr');
-    row.innerHTML = '<td colspan="6">Belum ada pendaftar.</td>';
+    row.innerHTML = '<td colspan="13">Belum ada pendaftar.</td>';
     applicantTableBody.appendChild(row);
     return;
   }
@@ -333,8 +333,15 @@ function renderApplicants() {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${index + 1}</td>
+      <td>${applicant.nisn || '-'}</td>
       <td>${applicant.name}</td>
-      <td>${applicant.email}</td>
+      <td>${applicant.email || '-'}</td>
+      <td>${applicant.birthplace || '-'}</td>
+      <td>${applicant.birthdate || '-'}</td>
+      <td>${applicant.gender || '-'}</td>
+      <td>${applicant.religion || '-'}</td>
+      <td>${applicant.originSchool || '-'}</td>
+      <td>${applicant.parent || '-'}</td>
       <td>${applicant.phone}</td>
       <td>${applicant.status}</td>
       <td>
@@ -507,7 +514,6 @@ function downloadBackup() {
   link.download = 'school-backup-' + new Date().toISOString().slice(0, 10) + '.json';
   document.body.appendChild(link);
   link.click();
-  document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
 
@@ -589,7 +595,16 @@ applicantForm.addEventListener('submit', (event) => {
     id: createId('applicant'),
     name: document.getElementById('applicantName').value.trim(),
     email: document.getElementById('applicantEmail').value.trim(),
+    nisn: document.getElementById('applicantNisn').value.trim(),
+    birthplace: document.getElementById('applicantBirthplace').value.trim(),
+    birthdate: document.getElementById('applicantBirthdate').value,
+    gender: document.getElementById('applicantGender').value,
+    religion: document.getElementById('applicantReligion').value.trim(),
+    address: document.getElementById('applicantAddress').value.trim(),
+    parent: document.getElementById('applicantParent').value.trim(),
     phone: document.getElementById('applicantPhone').value.trim(),
+    originSchool: document.getElementById('applicantOriginSchool').value.trim(),
+    file: document.getElementById('applicantFile').value.split('\\').pop(),
     status: 'Menunggu',
   });
   saveApplicants(applicants);

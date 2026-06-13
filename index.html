@@ -283,8 +283,48 @@
                 <input id="applicantEmail" type="email" required placeholder="Email pendaftar">
               </div>
               <div class="form-row">
-                <label for="applicantPhone">Telepon</label>
-                <input id="applicantPhone" type="tel" required placeholder="Telepon pendaftar">
+                <label for="applicantNisn">NISN</label>
+                <input id="applicantNisn" type="text" required placeholder="Masukkan NISN">
+              </div>
+              <div class="form-row">
+                <label for="applicantBirthplace">Tempat Lahir</label>
+                <input id="applicantBirthplace" type="text" required placeholder="Contoh: Jakarta">
+              </div>
+              <div class="form-row">
+                <label for="applicantBirthdate">Tanggal Lahir</label>
+                <input id="applicantBirthdate" type="date" required>
+              </div>
+              <div class="form-row">
+                <label for="applicantGender">Jenis Kelamin</label>
+                <select id="applicantGender" required>
+                  <option value="">Pilih jenis kelamin</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="applicantReligion">Agama</label>
+                <input id="applicantReligion" type="text" required placeholder="Contoh: Islam">
+              </div>
+              <div class="form-row">
+                <label for="applicantAddress">Alamat</label>
+                <textarea id="applicantAddress" required placeholder="Alamat lengkap"></textarea>
+              </div>
+              <div class="form-row">
+                <label for="applicantParent">Nama Orang Tua</label>
+                <input id="applicantParent" type="text" required placeholder="Nama orang tua">
+              </div>
+              <div class="form-row">
+                <label for="applicantPhone">Nomor HP</label>
+                <input id="applicantPhone" type="tel" required placeholder="Nomor telepon">
+              </div>
+              <div class="form-row">
+                <label for="applicantOriginSchool">Asal Sekolah</label>
+                <input id="applicantOriginSchool" type="text" required placeholder="Asal sekolah">
+              </div>
+              <div class="form-row">
+                <label for="applicantFile">Upload Berkas</label>
+                <input id="applicantFile" type="file" accept=".pdf,.jpg,.jpeg,.png">
               </div>
               <button type="submit" class="btn">Simpan Pendaftar</button>
             </form>
@@ -309,7 +349,21 @@
             <h3 class="section-heading">Data Pendaftar</h3>
             <table>
               <thead>
-                <tr><th>No</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Status</th><th>Aksi</th></tr>
+                <tr>
+                  <th>No</th>
+                  <th>NISN</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Tempat Lahir</th>
+                  <th>Tanggal Lahir</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Agama</th>
+                  <th>Asal Sekolah</th>
+                  <th>Nama Orang Tua</th>
+                  <th>Telepon</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
               </thead>
               <tbody id="applicantTableBody"></tbody>
             </table>
