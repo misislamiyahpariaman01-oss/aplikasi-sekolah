@@ -23,6 +23,7 @@
         <button class="nav-button" data-target="ppdb">PPDB</button>
         <button class="nav-button" data-target="absensi">Absensi</button>
         <button class="nav-button" data-target="laporan">Laporan</button>
+        <button class="nav-button" data-target="monitoring">Monitoring</button>
         <button class="nav-button" data-target="pengaturan">Pengaturan</button>
       </nav>
       <div class="sidebar-footer">
@@ -367,6 +368,40 @@
               </thead>
               <tbody id="applicantTableBody"></tbody>
             </table>
+          </div>
+        </section>
+
+        <section id="monitoring" class="page-section">
+          <div class="page-title">
+            <div>
+              <p class="eyebrow">Monitoring</p>
+              <h2>Aktivitas & Metrik Sistem</h2>
+            </div>
+            <p>Pantau aktivitas pengguna, perubahan data, dan status keseluruhan aplikasi.</p>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="stat-card">
+              <span class="stat-number" id="monitorTotalLogs">0</span>
+              <p>Total Log</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="monitorLastAction">-</span>
+              <p>Aksi Terakhir</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="monitorApplicants">0</span>
+              <p>Pendaftar</p>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" id="monitorStudents">0</span>
+              <p>Siswa</p>
+            </article>
+          </div>
+
+          <div class="form-card">
+            <h3>Activity Log Terbaru</h3>
+            <div class="log-list" id="monitorLogList" style="max-height:300px;overflow:auto;padding:8px;background:#fff;border-radius:6px;border:1px solid #eee"></div>
           </div>
         </section>
 

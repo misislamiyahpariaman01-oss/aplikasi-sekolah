@@ -32,6 +32,11 @@ const attendanceCount = document.getElementById('attendanceCount');
 const applicantPending = document.getElementById('applicantPending');
 const applicantAccepted = document.getElementById('applicantAccepted');
 const applicantRejected = document.getElementById('applicantRejected');
+const monitorTotalLogs = document.getElementById('monitorTotalLogs');
+const monitorLastAction = document.getElementById('monitorLastAction');
+const monitorLogList = document.getElementById('monitorLogList');
+const monitorApplicants = document.getElementById('monitorApplicants');
+const monitorStudents = document.getElementById('monitorStudents');
 
 const studentForm = document.getElementById('studentForm');
 const teacherForm = document.getElementById('teacherForm');
@@ -125,6 +130,27 @@ function loadUsers() { return loadData('schoolUsers', defaultUsers); }
 function saveUsers(users) { saveData('schoolUsers', users); }
 function loadProfile() { return loadData('schoolProfile', defaultProfile); }
 function saveProfile(profile) { saveData('schoolProfile', profile); }
+
+function loadLogs() { return loadData('schoolLogs', []); }
+function saveLogs(logs) { saveData('schoolLogs', logs); }
+
+function logAction(type, message) {
+  const logs = loadLogs();
+  const entry = { id: createId('log'), type, message, at: new Date().toISOString() };
+  logs.unshift(entry);
+  if (logs.length > 200) logs.pop();
+  saveLogs(logs);
+  try { renderMonitoring(); } catch (e) { /* ignore if render not ready */ }
+}
+
+function renderMonitoring() {
+  const logs = loadLogs();
+  monitorTotalLogs && (monitorTotalLogs.textContent = logs.length);
+  monitorLastAction && (monitorLastAction.textContent = logs[0] ? new Date(logs[0].at).toLocaleString() : '-');
+  monitorLogList && (monitorLogList.innerHTML = logs.slice(0,50).map((l) => `<div style="padding:6px;border-bottom:1px solid #f1f1f1"><strong>${l.type}</strong> — ${l.message}<div style="font-size:12px;color:#666">${new Date(l.at).toLocaleString()}</div></div>`).join(''));
+  monitorApplicants && (monitorApplicants.textContent = loadApplicants().length);
+  monitorStudents && (monitorStudents.textContent = loadStudents().length);
+}
 
 function setProfileForm() {
   const profile = loadProfile();
@@ -450,33 +476,40 @@ function handleAction(event) {
       saveStudents(students);
       renderStudents();
       renderScoreOptions();
+      logAction('delete', `Hapus siswa id:${id}`);
     }
     if (type === 'teacher') {
       saveTeachers(loadTeachers().filter((item) => item.id !== id));
       renderTeachers();
+      logAction('delete', `Hapus guru id:${id}`);
     }
     if (type === 'class') {
       saveClasses(loadClasses().filter((item) => item.id !== id));
       renderClasses();
+      logAction('delete', `Hapus kelas id:${id}`);
     }
     if (type === 'subject') {
       saveSubjects(loadSubjects().filter((item) => item.id !== id));
       renderSubjects();
       renderScoreOptions();
+      logAction('delete', `Hapus mata pelajaran id:${id}`);
     }
     if (type === 'score') {
       saveScores(loadScores().filter((item) => item.id !== id));
       renderScores();
       renderRanking();
+      logAction('delete', `Hapus nilai id:${id}`);
     }
     if (type === 'applicant') {
       saveApplicants(loadApplicants().filter((item) => item.id !== id));
       renderApplicants();
       updateSectionStats();
+      logAction('delete', `Hapus pendaftar id:${id}`);
     }
     if (type === 'user') {
       saveUsers(loadUsers().filter((item) => item.id !== id));
       renderUsers();
+      logAction('delete', `Hapus user id:${id}`);
     }
   }
 
@@ -490,6 +523,7 @@ function handleAction(event) {
     saveApplicants(applicants);
     renderApplicants();
     updateSectionStats();
+    logAction('applicant', `Pendaftar id:${id} => ${action === 'accept' ? 'Diterima' : 'Ditolak'}`);
   }
 }
 
@@ -515,6 +549,7 @@ function downloadBackup() {
   document.body.appendChild(link);
   link.click();
   URL.revokeObjectURL(url);
+  logAction('system', 'Backup data diunduh');
 }
 
 navButtons.forEach((button) => {
@@ -535,6 +570,7 @@ studentForm.addEventListener('submit', (event) => {
   renderScoreOptions();
   updateSectionStats();
   studentForm.reset();
+  logAction('student', `Tambah siswa: ${students[students.length-1].name}`);
 });
 
 teacherForm.addEventListener('submit', (event) => {
@@ -549,6 +585,7 @@ teacherForm.addEventListener('submit', (event) => {
   renderTeachers();
   updateSectionStats();
   teacherForm.reset();
+  logAction('teacher', `Tambah guru: ${teachers[teachers.length-1].name}`);
 });
 
 classForm.addEventListener('submit', (event) => {
@@ -559,6 +596,7 @@ classForm.addEventListener('submit', (event) => {
   renderClasses();
   updateSectionStats();
   classForm.reset();
+  logAction('class', `Tambah kelas: ${classes[classes.length-1].name}`);
 });
 
 subjectForm.addEventListener('submit', (event) => {
@@ -570,6 +608,7 @@ subjectForm.addEventListener('submit', (event) => {
   renderScoreOptions();
   updateSectionStats();
   subjectForm.reset();
+  logAction('subject', `Tambah mata pelajaran: ${subjects[subjects.length-1].name}`);
 });
 
 scoreForm.addEventListener('submit', (event) => {
@@ -586,6 +625,7 @@ scoreForm.addEventListener('submit', (event) => {
   renderRanking();
   updateSectionStats();
   scoreForm.reset();
+  logAction('score', `Tambah nilai untuk siswaId:${scores[scores.length-1].studentId} -> ${scores[scores.length-1].value}`);
 });
 
 applicantForm.addEventListener('submit', (event) => {
@@ -611,6 +651,7 @@ applicantForm.addEventListener('submit', (event) => {
   renderApplicants();
   updateSectionStats();
   applicantForm.reset();
+  logAction('applicant', `Pendaftar baru: ${applicants[applicants.length-1].name} (NISN:${applicants[applicants.length-1].nisn || '-'})`);
 });
 
 attendanceForm.addEventListener('submit', (event) => {
@@ -626,6 +667,7 @@ attendanceForm.addEventListener('submit', (event) => {
   renderAttendanceSummary();
   updateSectionStats();
   attendanceForm.reset();
+  logAction('attendance', `Input absensi untuk siswa:${attendance[attendance.length-1].studentId} status:${attendance[attendance.length-1].status}`);
 });
 
 profileForm.addEventListener('submit', (event) => {
@@ -637,6 +679,7 @@ profileForm.addEventListener('submit', (event) => {
     phone: schoolPhone.value.trim(),
   });
   alert('Profil sekolah berhasil disimpan.');
+  logAction('profile', `Profil diperbarui oleh user`);
 });
 
 userForm.addEventListener('submit', (event) => {
@@ -650,6 +693,7 @@ userForm.addEventListener('submit', (event) => {
   saveUsers(users);
   renderUsers();
   userForm.reset();
+  logAction('user', `Tambah user: ${userName.value.trim()} role:${userRole.value}`);
 });
 
 studentSearch?.addEventListener('input', () => renderStudents());
@@ -671,6 +715,7 @@ function initialize() {
   renderUsers();
   setProfileForm();
   updateSectionStats();
+  renderMonitoring();
   attendanceDate.value = new Date().toISOString().slice(0, 10);
 }
 
