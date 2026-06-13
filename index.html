@@ -13,6 +13,7 @@
       <nav class="site-nav">
         <button class="nav-button active" data-target="home">Beranda</button>
         <button class="nav-button" data-target="about">Tentang</button>
+        <button class="nav-button" data-target="news">Berita</button>
         <button class="nav-button" data-target="students">Siswa</button>
         <button class="nav-button" data-target="teachers">Guru</button>
         <button class="nav-button" data-target="contact">Kontak</button>
@@ -22,8 +23,18 @@
 
   <main class="container">
     <section id="home" class="page-section active">
-      <h2>Selamat datang di SMK Digital</h2>
-      <p>Website sekolah ini dibuat untuk menampilkan informasi profil sekolah, daftar siswa, guru, dan kontak.</p>
+      <div class="home-hero">
+        <div>
+          <h2>Selamat datang di SMK Digital</h2>
+          <p class="lead">Website sekolah ini menampilkan profil, berita, data siswa/guru, agenda sekolah, dan fasilitas secara interaktif.</p>
+        </div>
+        <div class="badge-group">
+          <span class="badge">Akreditasi A</span>
+          <span class="badge">Program Digital</span>
+          <span class="badge">Layanan Mandiri</span>
+        </div>
+      </div>
+
       <div class="card-grid">
         <article class="card">
           <h3>Visi</h3>
@@ -35,28 +46,102 @@
         </article>
         <article class="card">
           <h3>Program</h3>
-          <p>Teknologi Informasi, Multimedia, Rekayasa Perangkat Lunak, dan Bisnis Digital.</p>
+          <p>Rekayasa Perangkat Lunak, Teknik Komputer Jaringan, Multimedia, dan Bisnis Digital.</p>
+        </article>
+      </div>
+
+      <div class="metrics-grid">
+        <article class="stat-card">
+          <span class="stat-number" id="studentCount">0</span>
+          <p>Siswa Terdaftar</p>
+        </article>
+        <article class="stat-card">
+          <span class="stat-number" id="teacherCount">0</span>
+          <p>Guru Aktif</p>
+        </article>
+        <article class="stat-card">
+          <span class="stat-number" id="announcementCount">0</span>
+          <p>Info Terbaru</p>
+        </article>
+      </div>
+
+      <div class="facility-grid">
+        <article class="card facility-card">
+          <h3>Laboratorium</h3>
+          <p>Laboratorium Komputer dengan perangkat modern dan koneksi internet.</p>
+        </article>
+        <article class="card facility-card">
+          <h3>Perpustakaan</h3>
+          <p>Ruang baca lengkap dengan koleksi buku pelajaran dan literatur teknologi.</p>
+        </article>
+        <article class="card facility-card">
+          <h3>Ruang Kegiatan</h3>
+          <p>Tempat untuk pelatihan, lomba, dan pengembangan soft-skill siswa.</p>
         </article>
       </div>
     </section>
 
     <section id="about" class="page-section">
       <h2>Tentang Sekolah</h2>
-      <p>SMK Digital adalah sekolah menengah kejuruan yang mengedepankan praktik dan penguasaan teknologi.</p>
-      <ul class="info-list">
-        <li>Alamat: Jl. Pendidikan No. 10, Kota Contoh</li>
-        <li>Telp: (021) 123-4567</li>
-        <li>Email: info@smkdigital.sch.id</li>
-        <li>Akreditasi: A</li>
-      </ul>
+      <p>SMK Digital adalah sekolah menengah kejuruan yang mengedepankan praktik, inovasi, dan penguasaan teknologi.</p>
+      <div class="info-block">
+        <ul class="info-list">
+          <li>Alamat: Jl. Pendidikan No. 10, Kota Contoh</li>
+          <li>Telp: (021) 123-4567</li>
+          <li>Email: info@smkdigital.sch.id</li>
+          <li>Akreditasi: A</li>
+        </ul>
+        <div class="schedule-card">
+          <h3>Agenda Sekolah Mingguan</h3>
+          <table class="table-small">
+            <thead>
+              <tr><th>Hari</th><th>Kegiatan</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Senin</td><td>Upacara, Pelajaran RPL</td></tr>
+              <tr><td>Selasa</td><td>Workshop Multimedia</td></tr>
+              <tr><td>Rabu</td><td>Praktik TKJ dan Bimbingan Karir</td></tr>
+              <tr><td>Kamis</td><td>Ujian Kompetensi & Diskusi Proyek</td></tr>
+              <tr><td>Jumat</td><td>Pelajaran Agama dan Kegiatan Ekstrakurikuler</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="page-section">
+      <div class="section-header">
+        <h2>Pengumuman & Berita</h2>
+        <p>Informasi terbaru tentang kegiatan, pendaftaran, dan acara sekolah.</p>
+      </div>
+      <div class="form-card">
+        <form id="announcementForm">
+          <div class="form-row">
+            <label for="announcementTitle">Judul Pengumuman</label>
+            <input id="announcementTitle" type="text" required placeholder="Masukkan judul pengumuman">
+          </div>
+          <div class="form-row">
+            <label for="announcementBody">Isi Pengumuman</label>
+            <textarea id="announcementBody" rows="4" required placeholder="Tulis pengumuman..."></textarea>
+          </div>
+          <button type="submit" class="btn">Tambah Pengumuman</button>
+        </form>
+      </div>
+      <div class="list-wrap">
+        <ul id="announcementList" class="announcement-list"></ul>
+      </div>
     </section>
 
     <section id="students" class="page-section">
       <div class="section-header">
         <h2>Daftar Siswa</h2>
-        <p>Tambahkan siswa baru dengan formulir di bawah ini.</p>
+        <p>Kelola data siswa dengan formulir dan cari data dengan cepat.</p>
       </div>
       <div class="form-card">
+        <div class="form-row">
+          <label for="studentSearch">Cari Siswa</label>
+          <input id="studentSearch" type="search" placeholder="Cari nama, kelas, atau jurusan">
+        </div>
         <form id="studentForm">
           <div class="form-row">
             <label for="studentName">Nama Siswa</label>
@@ -76,7 +161,7 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th></tr>
+            <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th><th>Aksi</th></tr>
           </thead>
           <tbody id="studentTableBody"></tbody>
         </table>
@@ -84,11 +169,27 @@
     </section>
 
     <section id="teachers" class="page-section">
-      <h2>Daftar Guru</h2>
+      <div class="section-header">
+        <h2>Daftar Guru</h2>
+        <p>Tambahkan guru baru dan lihat mata pelajaran yang diajarkan.</p>
+      </div>
+      <div class="form-card form-split">
+        <form id="teacherForm">
+          <div class="form-row">
+            <label for="teacherName">Nama Guru</label>
+            <input id="teacherName" type="text" required placeholder="Masukkan nama guru">
+          </div>
+          <div class="form-row">
+            <label for="teacherSubject">Mata Pelajaran</label>
+            <input id="teacherSubject" type="text" required placeholder="Contoh: Matematika">
+          </div>
+          <button type="submit" class="btn">Tambah Guru</button>
+        </form>
+      </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th></tr>
+            <tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Aksi</th></tr>
           </thead>
           <tbody id="teacherTableBody"></tbody>
         </table>
